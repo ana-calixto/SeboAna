@@ -7,9 +7,13 @@ Clonar o repositório do Github localmente.
 No terminal, executar os seguintes comandos:
 
 bundle
+
 rails db:create
+
 rails db:migrate
+
 rails db:seed
+
 rails server
 
 No brownser, abrir http://localhost:3000
