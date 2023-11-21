@@ -22,6 +22,8 @@ Para testar as funções de administrador:
 user[email]: quirino@gmail.com
 user[password]: souadmin123
 
+A documentação com exemplos de requisição e respostas estão no link: https://documenter.getpostman.com/view/30105763/2s9Ye8fa6o
+
 
 Banco de Dados
 O Banco de Dados foi desenhado no SQlite que é o padrão do Rails. Para colocar em produção pode-se migrar facilmente para o Postgres, que já é integrado ao Rails. O Schema do BD tem as seguintes tabelas:
