@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.string :title
       t.string :author
       t.integer :price
-      t.boolean :published
+      t.boolean :available
       t.belongs_to :user, null: false, foreign_key: true
 
       t.timestamps

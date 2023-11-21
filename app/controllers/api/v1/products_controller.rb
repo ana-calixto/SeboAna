@@ -7,9 +7,11 @@ class Api::V1::ProductsController < ApplicationController
     render json: Product.find(params[:id])
   end
 
-  def index
-    render json: Product.all
-  end
+    def index
+      @products = Product.search(params)
+      render json: ProductSerializer.new(@products).serializable_hash.to_json
+    end
+
 
   def create
     product = current_user.products.build(product_params)
@@ -36,11 +38,11 @@ class Api::V1::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :author, :price, :published)
+    params.require(:product).permit(:title, :author, :price, :published, :category_id)
   end
 
   def check_owner
-    head :forbidden unless @product.user_id == current_user&.id
+    head :forbidden unless @product.user_id == current_user&.id 
   end
   
   def set_product

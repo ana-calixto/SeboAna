@@ -1,11 +1,15 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: %i[index show update destroy]
-  before_action :check_owner, only: %i[update destroy]
+  before_action :set_user, only: %i[show update destroy]
+  before_action :check_owner, only: %i[show update destroy]
   # before_action :check_login, only: %i[index]
   # before_action :check_admin, only: %i[index]
 
   def index
-    render json: User.all
+    if current_user.isadmin?
+    render json: User.with_deleted
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   def show 
@@ -49,8 +53,8 @@ class Api::V1::UsersController < ApplicationController
     head :forbidden unless @user.id == current_user&.id   
   end
 
-  def check_admin 
-    head :forbidden unless @user.isadmin == true
-  end
+  # def check_admin 
+  #   status: unauthorized unless current_user.isadmin?
+  # end
 
 end
