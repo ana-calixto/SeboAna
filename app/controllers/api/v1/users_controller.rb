@@ -39,6 +39,14 @@ class Api::V1::UsersController < ApplicationController
     @user.destroy 
     head 204 
   end 
+
+  def show_deleted_users
+    if current_user.isadmin?
+      render json: User.only_deleted
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+  end
   
 
   private
